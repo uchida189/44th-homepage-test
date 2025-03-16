@@ -1,4 +1,12 @@
 import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
 
 async function getData() {
   const res = await fetch('https://script.google.com/macros/s/AKfycbzpLCnEcBi8_vPZdO6CA9_vxCaBjklEcoceNtEB2hzhzpr589MOk3KNpIiEOjDtboyx5g/exec');
@@ -7,6 +15,14 @@ async function getData() {
   }
   const data = await res.json();
   return data
+}
+
+function CustomCarouselItem() {
+  return (
+    <div className="flex items-center justify-center w-ful h-32 bg-gray-200 dark:bg-gray-800 rounded-lg">
+      <p>Item</p>
+    </div>
+  )
 }
 
 export default async function Home() {
@@ -23,6 +39,15 @@ export default async function Home() {
           height={38}
           priority
         />
+        <Carousel className="w-full max-w-[calc(100vw-10rem)] ">
+          <CarouselContent>
+            <CarouselItem><CustomCarouselItem/></CarouselItem>
+            <CarouselItem>...</CarouselItem>
+            <CarouselItem>...</CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Get started by editing{" "}
