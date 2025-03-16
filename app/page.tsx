@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-
+import MyCarousel from "@/components/common/my_carousel";
 
 async function getData() {
   const res = await fetch('https://script.google.com/macros/s/AKfycbzpLCnEcBi8_vPZdO6CA9_vxCaBjklEcoceNtEB2hzhzpr589MOk3KNpIiEOjDtboyx5g/exec');
@@ -19,13 +19,45 @@ async function getData() {
 
 function CustomCarouselItem() {
   return (
-    <div className="flex items-center justify-center w-ful h-32 bg-gray-200 dark:bg-gray-800 rounded-lg">
+    <div className="flex items-center justify-center w-full h-32 bg-gray-200 dark:bg-gray-800 rounded-lg">
       <p>Item</p>
     </div>
   )
 }
 
 export default async function Home() {
+  const items = [
+    <CustomCarouselItem/>,
+    <CustomCarouselItem/>,
+    <CustomCarouselItem/>,
+    <CustomCarouselItem/>,
+    <CustomCarouselItem/>,
+    // {
+    //   title: 'Item 1',
+    //   content: 'Description of item 1.',
+    //   imageUrl: '/image1.jpg', // 画像のパス
+    // },
+    // {
+    //   title: 'Item 2',
+    //   content: 'Description of item 2.',
+    //   imageUrl: '/image2.jpg',
+    // },
+    // {
+    //   title: 'Item 3',
+    //   content: 'Description of item 3.',
+    //   imageUrl: '/image3.jpg',
+    // },
+    // {
+    //   title: 'Item 4',
+    //   content: 'Description of item 4.',
+    //   imageUrl: '/image4.jpg',
+    // },
+    // {
+    //   title: 'Item 5',
+    //   content: 'Description of item 5.',
+    //   imageUrl: '/image5.jpg',
+    // },
+  ];
   const data = await getData();
   console.log(data)
   return (
@@ -39,7 +71,8 @@ export default async function Home() {
           height={38}
           priority
         />
-        <Carousel className="w-full max-w-[calc(100vw-10rem)] ">
+        <MyCarousel items={items}/>
+        {/* <Carousel className="w-full max-w-[calc(100vw-10rem)] ">
           <CarouselContent>
             <CarouselItem><CustomCarouselItem/></CarouselItem>
             <CarouselItem>...</CarouselItem>
@@ -47,7 +80,7 @@ export default async function Home() {
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
-        </Carousel>
+        </Carousel> */}
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Get started by editing{" "}
