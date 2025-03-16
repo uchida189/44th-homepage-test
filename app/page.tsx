@@ -1,6 +1,17 @@
 import Image from "next/image";
 
-export default function Home() {
+async function getData() {
+  const res = await fetch('https://script.google.com/macros/s/AKfycbzpLCnEcBi8_vPZdO6CA9_vxCaBjklEcoceNtEB2hzhzpr589MOk3KNpIiEOjDtboyx5g/exec');
+  if (!res.ok) {
+    throw new Error("Failed to get data")
+  }
+  const data = await res.json();
+  return data
+}
+
+export default async function Home() {
+  const data = await getData();
+  console.log(data)
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -22,7 +33,13 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
-
+        {/* <div>
+          {data.map((item, index:number) => (
+            <div key={index}>
+              <p>{item['投稿日時']}</p>
+            </div>
+          ))}
+        </div> */}
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
